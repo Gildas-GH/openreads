@@ -289,5 +289,6 @@
     "duck_duck_go_warning": "La recherche de couverture en ligne utilise DuckDuckGo, qui est un service propriétaire. Soyez prudent avec les données partagées",
     "warning_yes": "Ça me va",
     "warning_no": "Retour",
-    "warning_yes_and_dont_show": "Ça me va, ne plus me le rappeler"
+    "warning_yes_and_dont_show": "Ça me va, ne plus me le rappeler",
+    "rate_limit": "Limite atteinte. Veuillez réessayer dans 5 minutes."
 }

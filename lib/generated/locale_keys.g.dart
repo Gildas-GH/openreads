@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-abstract class LocaleKeys {
+abstract class  LocaleKeys {
   static const books_finished = 'books_finished';
   static const books_in_progress = 'books_in_progress';
   static const books_for_later = 'books_for_later';
@@ -84,6 +84,7 @@ abstract class LocaleKeys {
   static const no_cover = 'no_cover';
   static const choose_edition = 'choose_edition';
   static const editions_lowercase = 'editions_lowercase';
+  static const only_editions_with_covers = 'only_editions_with_covers';
   static const published_lowercase = 'published_lowercase';
   static const cancel = 'cancel';
   static const flash_on = 'flash_on';
@@ -182,8 +183,7 @@ abstract class LocaleKeys {
   static const changelog_description = 'changelog_description';
   static const licence = 'licence';
   static const support_the_project = 'support_the_project';
-  static const support_the_project_description =
-      'support_the_project_description';
+  static const support_the_project_description = 'support_the_project_description';
   static const support_option_1 = 'support_option_1';
   static const support_option_2 = 'support_option_2';
   static const need_storage_permission = 'need_storage_permission';
@@ -198,11 +198,9 @@ abstract class LocaleKeys {
   static const use_this_file = 'use_this_file';
   static const backup = 'backup';
   static const create_local_backup = 'create_local_backup';
-  static const create_local_backup_description =
-      'create_local_backup_description';
+  static const create_local_backup_description = 'create_local_backup_description';
   static const create_cloud_backup = 'create_cloud_backup';
-  static const create_cloud_backup_description =
-      'create_cloud_backup_description';
+  static const create_cloud_backup_description = 'create_cloud_backup_description';
   static const restore_backup = 'restore_backup';
   static const restore_backup_description_1 = 'restore_backup_description_1';
   static const restore_backup_description_2 = 'restore_backup_description_2';
@@ -222,8 +220,7 @@ abstract class LocaleKeys {
   static const migration_v1_to_v2_2 = 'migration_v1_to_v2_2';
   static const migration_v1_to_v2_finished = 'migration_v1_to_v2_finished';
   static const migration_v1_to_v2_retrigger = 'migration_v1_to_v2_retrigger';
-  static const migration_v1_to_v2_retrigger_description =
-      'migration_v1_to_v2_retrigger_description';
+  static const migration_v1_to_v2_retrigger_description = 'migration_v1_to_v2_retrigger_description';
   static const dark_mode_style = 'dark_mode_style';
   static const dark_mode_natural = 'dark_mode_natural';
   static const dark_mode_amoled = 'dark_mode_amoled';
@@ -231,8 +228,7 @@ abstract class LocaleKeys {
   static const change_book_format = 'change_book_format';
   static const change_books_author = 'change_books_author';
   static const update_successful_message = 'update_successful_message';
-  static const bulk_update_unsuccessful_message =
-      'bulk_update_unsuccessful_message';
+  static const bulk_update_unsuccessful_message = 'bulk_update_unsuccessful_message';
   static const export_successful = 'export_successful';
   static const openreads_backup = 'openreads_backup';
   static const csv = 'csv';
@@ -244,15 +240,14 @@ abstract class LocaleKeys {
   static const choose_not_finished_shelf = 'choose_not_finished_shelf';
   static const import_successful = 'import_successful';
   static const ok = 'ok';
-  static const daysSetCustomTimeTitle = 'day.set_custom_time_title';
+  static const day_set_custom_time_title = 'day.set_custom_time_title';
   static const day = 'day';
-  static const hoursSetCustomTimeTitle = 'hour.set_custom_time_title';
+  static const hour_set_custom_time_title = 'hour.set_custom_time_title';
   static const hour = 'hour';
-  static const minutesSetCustomTimeTitle = 'minute.set_custom_time_title';
+  static const minute_set_custom_time_title = 'minute.set_custom_time_title';
   static const minute = 'minute';
   static const set_custom_reading_time = 'set_custom_reading_time';
   static const select_all = 'select_all';
-  static const only_editions_with_covers = 'only_editions_with_covers';
   static const general_search = 'general_search';
   static const no_search_results = 'no_search_results';
   static const click_to_add_book_manually = 'click_to_add_book_manually';
@@ -263,8 +258,7 @@ abstract class LocaleKeys {
   static const cover_not_found_in_ol = 'cover_not_found_in_ol';
   static const books_settings = 'books_settings';
   static const download_missing_covers = 'download_missing_covers';
-  static const download_missing_covers_explanation =
-      'download_missing_covers_explanation';
+  static const download_missing_covers_explanation = 'download_missing_covers_explanation';
   static const downloaded_covers = 'downloaded_covers';
   static const try_downloading_covers = 'try_downloading_covers';
   static const filter_out_selected_tags = 'filter_out_selected_tags';
@@ -278,15 +272,17 @@ abstract class LocaleKeys {
   static const added_on = 'added_on';
   static const modified_on = 'modified_on';
   static const default_books_format = 'default_books_format';
-  static const coverStillDownloaded = 'cover_still_downloaded';
-  static const waitForDownloadingToFinish = 'wait_for_downloading_to_finish';
-  static const saveWithoutCover = 'save_without_cover';
-  static const searchOnlineForCover = 'search_online_for_cover';
-  static const bookCover = 'book_cover';
-  static const duplicateBook = 'duplicate_book';
-  static const copyBook = 'copy_book';
-  static const duckDuckGoWarning = 'duck_duck_go_warning';
-  static const warningYes = 'warning_yes';
-  static const warningNo = 'warning_no';
-  static const warningYesAndDontShow = 'warning_yes_and_dont_show';
+  static const cover_still_downloaded = 'cover_still_downloaded';
+  static const wait_for_downloading_to_finish = 'wait_for_downloading_to_finish';
+  static const save_without_cover = 'save_without_cover';
+  static const search_online_for_cover = 'search_online_for_cover';
+  static const book_cover = 'book_cover';
+  static const duplicate_book = 'duplicate_book';
+  static const copy_book = 'copy_book';
+  static const duck_duck_go_warning = 'duck_duck_go_warning';
+  static const warning_yes = 'warning_yes';
+  static const warning_no = 'warning_no';
+  static const warning_yes_and_dont_show = 'warning_yes_and_dont_show';
+  static const rate_limit = 'rate_limit';
+
 }

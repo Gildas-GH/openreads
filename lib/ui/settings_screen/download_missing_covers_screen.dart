@@ -13,6 +13,11 @@ class DownloadMissingCoversScreen extends StatefulWidget {
     this.bookIDs,
   });
 
+  static showInfoSnackbar(String message) {
+    final snackBar = SnackBar(content: Text(message));
+    snackbarKey.currentState?.showSnackBar(snackBar);
+  }
+
   final List<int>? bookIDs;
 
   @override
@@ -87,24 +92,35 @@ class _DownloadMissingCoversScreenState
     final asyncTasks = <Future>[];
     const asyncTasksNumber = 20;
 
-    for (final book in books) {
-      if (book.hasCover == false) {
-        asyncTasks.add(_downloadCover(book));
+    try {
+      for (final book in books) {
+        if (book.hasCover == false) {
+          asyncTasks.add(_downloadCover(book));
+        }
+
+        if (asyncTasks.length == asyncTasksNumber) {
+          await Future.wait(asyncTasks);
+          asyncTasks.clear();
+        }
+
+        setState(() {
+          _progressValue++;
+          _progress = '$_progressValue/${books.length}';
+        });
       }
 
-      if (asyncTasks.length == asyncTasksNumber) {
-        await Future.wait(asyncTasks);
-        asyncTasks.clear();
-      }
+      // Wait for the rest of async tasks
+      await Future.wait(asyncTasks);
 
+    } on Error catch (_) {
+      // Stop the task if we got rate limited
       setState(() {
-        _progressValue++;
-        _progress = '$_progressValue/${books.length}';
+        _isDownloading = false;
       });
-    }
 
-    // Wait for the rest of async tasks
-    await Future.wait(asyncTasks);
+      // Display a snackbar
+      DownloadMissingCoversScreen.showInfoSnackbar(LocaleKeys.rate_limit.tr());
+    }
   }
 
   _downloadCover(Book book) async {

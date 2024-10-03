@@ -129,3 +129,7 @@ This deletes all app data, to keep your books please make a backup first.<br/>
    ```sh
    flutter run
    ```
+
+3. To generate locale keys from JSON translations, when you want to add a new key.
+
+   ``dart run easy_localization:generate -S assets/translations/ -s en-US.json -f keys -o locale_keys.g.dart``

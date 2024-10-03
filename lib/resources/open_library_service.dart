@@ -56,6 +56,11 @@ class OpenLibraryService {
         Uri.parse('$coversBaseUrl/b/isbn/$isbn-L.jpg'),
       );
 
+      // If we got rate limited, throw an exception
+      if (response.statusCode == 403) {
+        throw Error();
+      }
+
       // If the response is less than 500 bytes,
       // probably the cover is not available
       if (response.bodyBytes.length < 500) return null;
