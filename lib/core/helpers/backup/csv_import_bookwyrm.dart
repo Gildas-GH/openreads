@@ -83,6 +83,40 @@ class CSVImportBookwyrm {
     return books;
   }
 
+  static List<Reading> _getReadings(int i, List<List<dynamic>> csv) {
+    // Extraction des dates de lecture
+    final String startDateString = csv[i][csv[0].indexOf('start_date')].toString();
+    final String finishDateString = csv[i][csv[0].indexOf('finish_date')].toString();
+
+    DateTime? startDate;
+    DateTime? finishDate;
+
+    // Parse les dates si elles existent et ne sont pas vides
+    if (startDateString.isNotEmpty) {
+      startDate = DateTime.tryParse(startDateString);
+    }
+
+    if (finishDateString.isNotEmpty) {
+      finishDate = DateTime.tryParse(finishDateString);
+    }
+
+    // Si ni startDate ni finishDate n'existent, retourne une liste vide
+    if (startDate == null && finishDate == null) {
+      return [];
+    }
+
+    // Crée un objet Reading avec les dates valides (ou nulles si manquantes)
+    final reading = Reading(
+      startDate: startDate,
+      finishDate: finishDate,
+    );
+
+    // Retourne la liste avec l'objet Reading (ou une liste vide si aucune date)
+    return [reading];
+  }
+
+
+
   static Book? _parseBook(
     BuildContext context,
     int i,
@@ -99,7 +133,7 @@ class CSVImportBookwyrm {
         rating: _getRating(i, csv),
         myReview: _getMyReview(i, csv),
         status: BookStatus.read,
-        readings: List<Reading>.empty(growable: true),
+        readings: _getReadings(i, csv),
         dateAdded: DateTime.now(),
         dateModified: DateTime.now(),
       );
