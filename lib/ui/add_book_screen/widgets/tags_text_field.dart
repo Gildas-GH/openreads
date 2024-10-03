@@ -119,13 +119,13 @@ class TagsField extends StatelessWidget {
                     ),
                   );
                 },
-                suggestionsCallback: (pattern) =>
-                    allTags?.where((String option) {
-                      return option
-                          .toLowerCase()
-                          .startsWith(pattern.toLowerCase());
-                    }).toList() ??
-                    [],
+                suggestionsCallback: (pattern) {
+                  final selectedTags = BlocProvider.of<EditBookCubit>(context).state.tags?.split('|||||') ?? [];
+                  return allTags?.where((String option) {
+                    return !selectedTags.contains(option) && 
+                          option.toLowerCase().startsWith(pattern.toLowerCase());
+                  }).toList() ?? [];
+                },
                 onSelected: (suggestion) {
                   controller?.text = suggestion;
                   if (onSubmitted != null) {
