@@ -85,6 +85,7 @@ class _SearchPageState extends State<SearchPage> {
                               ),
                             );
                           },
+                          inSearchResults: true,
                         );
                       },
                     );

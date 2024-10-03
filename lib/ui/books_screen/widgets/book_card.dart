@@ -22,6 +22,7 @@ class BookCard extends StatefulWidget {
     required this.addBottomPadding,
     this.onLongPressed,
     this.cardColor,
+    this.inSearchResults = false
   });
 
   final Book book;
@@ -30,6 +31,7 @@ class BookCard extends StatefulWidget {
   final Function() onPressed;
   final Function()? onLongPressed;
   final Color? cardColor;
+  final bool inSearchResults;
 
   @override
   State<BookCard> createState() => _BookCardState();
@@ -210,6 +212,20 @@ class _BookCardState extends State<BookCard> {
     return chips;
   }
 
+  IconData? _decideStatusIcon(BookStatus? status) {
+    if (status == BookStatus.read) {
+      return Icons.done;
+    } else if (status == BookStatus.inProgress) {
+      return Icons.autorenew;
+    } else if (status == BookStatus.forLater) {
+      return Icons.timelapse;
+    } else if (status == BookStatus.unfinished) {
+      return Icons.not_interested;
+    } else {
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final coverFile = widget.book.getCoverFile();
@@ -310,6 +326,19 @@ class _BookCardState extends State<BookCard> {
                                   .onSurface
                                   .withOpacity(0.4),
                             ),
+                            widget.inSearchResults
+                                ? Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Icon(
+                                      _decideStatusIcon(widget.book.status),
+                                      size: 15,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface
+                                          .withOpacity(0.4),
+                                    ),
+                                  )
+                                : const SizedBox(),                            
                           ],
                         ),
                         Text(
