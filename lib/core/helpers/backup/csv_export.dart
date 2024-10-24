@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 
 import 'package:csv/csv.dart';
 import 'package:easy_localization/easy_localization.dart';
-// import 'package:shared_storage/shared_storage.dart'; // TODO: Migrate to another package
 
 import 'package:openreads/core/constants/enums/enums.dart';
 import 'package:openreads/core/helpers/backup/backup.dart';
@@ -49,26 +48,11 @@ class CSVExport {
     final fileName = await _prepareCSVExportFileName();
 
     try {
-      if (Platform.isAndroid) {
-        // TODO: Migrate to another package
-        // final selectedUriDir = await openDocumentTree();
+      String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
 
-        // if (selectedUriDir == null) return;
+      if (selectedDirectory == null) return;
 
-        // createFileAsBytes(
-        //   selectedUriDir,
-        //   mimeType: 'text/csv',
-        //   displayName: fileName,
-        //   bytes: csv,
-        // );
-      } else if (Platform.isIOS) {
-        String? selectedDirectory =
-            await FilePicker.platform.getDirectoryPath();
-
-        if (selectedDirectory == null) return;
-
-        File('$selectedDirectory/$fileName').writeAsBytesSync(csv);
-      }
+      File('$selectedDirectory/$fileName').writeAsBytesSync(csv);
 
       BackupGeneral.showInfoSnackbar(LocaleKeys.export_successful.tr());
     } catch (e) {
@@ -103,6 +87,7 @@ class CSVExport {
         ('readings'),
         ('date_added'),
         ('date_modified'),
+        ('listening_time'),
       ];
 
       rows.add(firstRow);
@@ -153,6 +138,7 @@ class CSVExport {
         );
         newRow.add(book.dateAdded.toIso8601String());
         newRow.add(book.dateModified.toIso8601String());
+        newRow.add(book.listeningTime != null ? book.listeningTime.toString() : '');
 
         rows.add(newRow);
       }
