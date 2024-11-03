@@ -216,7 +216,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     count: 4,
                     effect: ExpandingDotsEffect(
                       activeDotColor: Theme.of(context).colorScheme.primary,
-                      dotColor: Theme.of(context).colorScheme.surfaceVariant,
+                      dotColor: Theme.of(context).colorScheme.surfaceContainerHighest,
                       dotHeight: 12,
                       dotWidth: 12,
                     ),

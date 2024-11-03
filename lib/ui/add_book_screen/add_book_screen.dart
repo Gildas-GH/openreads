@@ -617,7 +617,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
                           borderRadius: BorderRadius.circular(cornerRadius),
                           color: Theme.of(context)
                               .colorScheme
-                              .surfaceVariant
+                              .surfaceContainerHighest
                               .withOpacity(0.5),
                           border: Border.all(color: dividerColor),
                         ),
@@ -692,7 +692,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
                         onPressed: () => Navigator.pop(context),
                         style: ButtonStyle(
                           shape:
-                              MaterialStateProperty.all(RoundedRectangleBorder(
+                              WidgetStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(cornerRadius),
                           )),
                         ),
@@ -709,7 +709,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
                                 ? () => _updateBook(state)
                                 : () => _saveBook(state),
                             style: ButtonStyle(
-                              shape: MaterialStateProperty.all(
+                              shape: WidgetStateProperty.all(
                                   RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.circular(cornerRadius),
@@ -740,7 +740,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
           context.read<EditBookCubit>().addNewReading(Reading());
         },
         style: ButtonStyle(
-          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+          shape: WidgetStateProperty.all(RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(cornerRadius),
           )),
         ),

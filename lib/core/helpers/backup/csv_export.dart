@@ -22,11 +22,11 @@ class CSVExport {
     final exportPath = await BackupGeneral.openFolderPicker(context);
     if (exportPath == null) return;
 
-    final fileName = await _prepareCSVExportFileName();
-    final filePath = '$exportPath/$fileName';
-
     try {
       // TODO: Migrate to another package
+      // final fileName = await _prepareCSVExportFileName();
+      // final filePath = '$exportPath/$fileName';
+
       // createFileAsBytes(
       //   Uri(path: filePath),
       //   mimeType: 'text/csv',

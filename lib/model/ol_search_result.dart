@@ -338,7 +338,7 @@ class OLSearchResultDoc {
             ? null
             : List<String>.from(json["subject_facet"].map((x) => x)),
         version:
-            json["_version_"] == null ? null : json["_version_"].toDouble(),
+            json["_version_"]?.toDouble(),
         placeFacet: json["place_facet"] == null
             ? null
             : List<String>.from(json["place_facet"].map((x) => x)),

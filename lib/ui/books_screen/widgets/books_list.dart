@@ -84,7 +84,7 @@ class _BooksListState extends State<BooksList>
                         style: TextStyle(
                           color: Theme.of(context)
                               .colorScheme
-                              .onBackground
+                              .onSurface
                               .withOpacity(0.7),
                           fontSize: 12,
                         ),

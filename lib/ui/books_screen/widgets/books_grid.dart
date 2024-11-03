@@ -85,7 +85,7 @@ class _BooksGridState extends State<BooksGrid>
                   style: TextStyle(
                     color: Theme.of(context)
                         .colorScheme
-                        .onBackground
+                        .onSurface
                         .withOpacity(0.7),
                     fontSize: 12,
                   ),

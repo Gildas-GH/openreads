@@ -71,7 +71,7 @@ class _BookTextFieldState extends State<BookTextField> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.5),
+          color: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.5),
           borderRadius: BorderRadius.circular(cornerRadius),
           border: Border.all(color: dividerColor),
         ),
@@ -91,7 +91,7 @@ class _BookTextFieldState extends State<BookTextField> {
         hideOnEmpty: true,
         itemBuilder: (context, suggestion) {
           return Container(
-            color: Theme.of(context).colorScheme.surfaceVariant,
+            color: Theme.of(context).colorScheme.surfaceContainerHighest,
             child: ListTile(
               title: Text(suggestion),
             ),

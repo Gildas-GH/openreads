@@ -29,7 +29,7 @@ class AddBookMethodButton extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(cornerRadius),
-            color: Theme.of(context).colorScheme.surfaceVariant,
+            color: Theme.of(context).colorScheme.surfaceContainerHighest,
             border: Border.all(color: dividerColor),
           ),
           child: Column(

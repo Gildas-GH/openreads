@@ -817,7 +817,7 @@ class _BooksScreenState extends State<BooksScreen>
           );
         },
       );
-    } else if (Platform.isAndroid) {
+    } else {
       showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
@@ -911,7 +911,7 @@ class _BooksScreenState extends State<BooksScreen>
 
           return PopScope(
             canPop: selectedBookIds.isEmpty,
-            onPopInvoked: (didPop) {
+            onPopInvokedWithResult: (bool didPop, Object? _) {
               if (didPop) {
                 return;
               }

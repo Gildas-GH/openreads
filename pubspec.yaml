@@ -42,7 +42,7 @@ dependencies:
   filesystem_picker: ^4.0.0
   archive: ^3.3.5
   share_plus: ^10.0.2
-  device_info_plus: ^10.0.1
+  device_info_plus: ^11.1.0
   dynamic_color: ^1.6.2
   image_fade: ^0.6.2
   package_info_plus: ^8.0.0
@@ -61,12 +61,15 @@ dependencies:
   dotted_border: ^2.1.0
   flutter_cache_manager: ^3.3.1
   modal_bottom_sheet: ^3.0.0
+  sqflite_common_ffi: ^2.3.4
+  sqlite3_flutter_libs: ^0.5.26
+  collection: ^1.18.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
-  flutter_launcher_icons: "^0.13.1"
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.1
 
 flutter_launcher_icons:
   image_path: "./assets/icons/icon.png"

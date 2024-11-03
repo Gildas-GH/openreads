@@ -42,7 +42,7 @@ class BookTypeDropdown extends StatelessWidget {
           border: Border.all(
             color: dividerColor,
           ),
-          color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.5),
+          color: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.5),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(cornerRadius),
             bottomLeft: Radius.circular(cornerRadius),

@@ -26,7 +26,7 @@ class SetChallengeBox extends StatelessWidget {
         side: BorderSide(color: dividerColor, width: 1),
         borderRadius: BorderRadius.circular(cornerRadius),
       ),
-      color: Theme.of(context).colorScheme.surfaceVariant,
+      color: Theme.of(context).colorScheme.surfaceContainerHighest,
       child: InkWell(
         borderRadius: BorderRadius.circular(cornerRadius),
         onTap: () => showDialog(

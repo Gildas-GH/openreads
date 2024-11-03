@@ -30,6 +30,7 @@ import 'package:openreads/resources/open_library_service.dart';
 import 'package:openreads/ui/books_screen/books_screen.dart';
 import 'package:openreads/ui/welcome_screen/welcome_screen.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 late BookCubit bookCubit;
 late Directory appDocumentsDirectory;
@@ -42,6 +43,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
 
   _setAndroidConfig();
+  _setLinuxConfig();
 
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
@@ -100,7 +102,6 @@ class App extends StatelessWidget {
               create: (context) => MigrationV1ToV2Bloc()),
           BlocProvider<OpenLibBloc>(
             create: (context) => OpenLibBloc(
-              RepositoryProvider.of<OpenLibraryService>(context),
               RepositoryProvider.of<ConnectivityService>(context),
             ),
           ),
@@ -167,7 +168,7 @@ class _OpenreadsAppState extends State<OpenreadsApp>
         builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
       if (widget.themeState.amoledDark) {
         darkDynamic = darkDynamic?.copyWith(
-          background: Colors.black,
+          surface: Colors.black,
         );
       }
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
@@ -250,6 +251,16 @@ _setAndroidConfig() async {
     if (sdkInt <= 25) {
       HttpOverrides.global = OldAndroidHttpOverrides();
     }
+  }
+}
+
+_setLinuxConfig() async {
+  if (Platform.isLinux) {
+    // Initialize FFI
+    sqfliteFfiInit();
+    
+    // Initialize the FFI database factory
+    databaseFactory = databaseFactoryFfi;
   }
 }
 

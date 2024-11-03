@@ -22,21 +22,21 @@ class WelcomeChoiceButton extends StatelessWidget {
             child: FilledButton.tonal(
               style: ButtonStyle(
                 backgroundColor: isSkipImporting
-                    ? MaterialStateProperty.all(
+                    ? WidgetStateProperty.all(
                         Theme.of(context).colorScheme.primary,
                       )
-                    : MaterialStateProperty.all(
+                    : WidgetStateProperty.all(
                         Theme.of(context)
                             .colorScheme
-                            .surfaceVariant
+                            .surfaceContainerHighest
                             .withOpacity(0.3),
                       ),
-                foregroundColor: MaterialStateProperty.all(
+                foregroundColor: WidgetStateProperty.all(
                   isSkipImporting
                       ? Theme.of(context).colorScheme.onSecondary
                       : Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
-                shape: MaterialStateProperty.all(
+                shape: WidgetStateProperty.all(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                     side: isSkipImporting

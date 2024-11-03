@@ -30,7 +30,7 @@ class _SearchCoversScreenState extends State<SearchCoversScreen> {
     super.initState();
 
     searchQuery =
-        '${widget.book.title} ${widget.book.author} ${LocaleKeys.bookCover.tr()}';
+        '${widget.book.title} ${widget.book.author} ${LocaleKeys.book_cover.tr()}';
 
     controller = TextEditingController(text: searchQuery);
 
@@ -48,7 +48,7 @@ class _SearchCoversScreenState extends State<SearchCoversScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          LocaleKeys.searchOnlineForCover.tr(),
+          LocaleKeys.search_online_for_cover.tr(),
           style: const TextStyle(fontSize: 18),
         ),
       ),

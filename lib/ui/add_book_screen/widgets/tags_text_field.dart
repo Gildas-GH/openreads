@@ -102,7 +102,7 @@ class TagsField extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.5),
+          color: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.5),
           borderRadius: BorderRadius.circular(cornerRadius),
           border: Border.all(color: dividerColor),
         ),
@@ -113,7 +113,7 @@ class TagsField extends StatelessWidget {
                 controller: controller,
                 itemBuilder: (context, suggestion) {
                   return Container(
-                    color: Theme.of(context).colorScheme.surfaceVariant,
+                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
                     child: ListTile(
                       title: Text(suggestion),
                     ),

@@ -201,7 +201,7 @@ class _ReadingRowState extends State<ReadingRow> {
               context.read<EditBookCubit>().removeReading(widget.index);
             },
             style: ButtonStyle(
-              shape: MaterialStateProperty.all(
+              shape: WidgetStateProperty.all(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(cornerRadius),
                 ),

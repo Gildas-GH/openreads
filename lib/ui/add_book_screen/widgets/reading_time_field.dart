@@ -62,7 +62,7 @@ class _BookReadingTimeField extends State<BookReadingTimeField> {
                     borderRadius: BorderRadius.circular(cornerRadius),
                     color: Theme.of(context)
                         .colorScheme
-                        .surfaceVariant
+                        .surfaceContainerHighest
                         .withOpacity(0.5),
                     border: Border.all(color: dividerColor),
                   ),
@@ -149,7 +149,7 @@ class _BookReadingTimeField extends State<BookReadingTimeField> {
                   : FilledButton.tonal(
                       onPressed: () => Navigator.pop(context, 'Cancel'),
                       style: ButtonStyle(
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        shape: WidgetStateProperty.all(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(cornerRadius),
                         )),
                       ),
@@ -167,7 +167,7 @@ class _BookReadingTimeField extends State<BookReadingTimeField> {
                     )
                   : FilledButton(
                       style: ButtonStyle(
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        shape: WidgetStateProperty.all(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(cornerRadius),
                         )),
                       ),
@@ -191,17 +191,17 @@ class _BookReadingTimeField extends State<BookReadingTimeField> {
                     _buildTextField(
                       controller: _day,
                       maxLength: 5,
-                      text: LocaleKeys.daysSetCustomTimeTitle.tr(),
+                      text: LocaleKeys.day_set_custom_time_title.tr(),
                     ),
                     _buildTextField(
                       controller: _hours,
                       maxLength: 2,
-                      text: LocaleKeys.hoursSetCustomTimeTitle.tr(),
+                      text: LocaleKeys.hour_set_custom_time_title.tr(),
                     ),
                     _buildTextField(
                       controller: _minutes,
                       maxLength: 2,
-                      text: LocaleKeys.minutesSetCustomTimeTitle.tr(),
+                      text: LocaleKeys.minute_set_custom_time_title.tr(),
                     ),
                   ],
                 ),

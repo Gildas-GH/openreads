@@ -97,7 +97,7 @@ class BookCardOLEdition extends StatelessWidget {
                                           fontSize: 12,
                                           color: Theme.of(context)
                                               .colorScheme
-                                              .onBackground
+                                              .onSurface
                                               .withOpacity(0.6),
                                         ),
                                       )
@@ -119,7 +119,7 @@ class BookCardOLEdition extends StatelessWidget {
                         fontSize: 10,
                         color: Theme.of(context)
                             .colorScheme
-                            .onBackground
+                            .onSurface
                             .withOpacity(0.8),
                       ),
                     )
@@ -132,7 +132,7 @@ class BookCardOLEdition extends StatelessWidget {
                         fontSize: 13,
                         color: Theme.of(context)
                             .colorScheme
-                            .onBackground
+                            .onSurface
                             .withOpacity(0.8),
                       ),
                     )

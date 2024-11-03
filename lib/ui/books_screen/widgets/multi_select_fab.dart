@@ -139,7 +139,7 @@ class MultiSelectFAB extends StatelessWidget {
                   )
                 : FilledButton.tonal(
                     style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
+                      shape: WidgetStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(cornerRadius),
                         ),
@@ -161,7 +161,7 @@ class MultiSelectFAB extends StatelessWidget {
                   )
                 : FilledButton(
                     style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
+                      shape: WidgetStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(cornerRadius),
                         ),
@@ -218,7 +218,7 @@ class MultiSelectFAB extends StatelessWidget {
               color: Theme.of(context).colorScheme.onSecondary,
             ),
             backgroundColor: Theme.of(context).colorScheme.secondary,
-            labelBackgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+            labelBackgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
             foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
             label: LocaleKeys.change_book_format.tr(),
             onTap: () {
@@ -254,7 +254,7 @@ class MultiSelectFAB extends StatelessWidget {
               color: Theme.of(context).colorScheme.onSecondary,
             ),
             backgroundColor: Theme.of(context).colorScheme.secondary,
-            labelBackgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+            labelBackgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
             foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
             label: LocaleKeys.change_books_author.tr(),
             onTap: () {
@@ -290,7 +290,7 @@ class MultiSelectFAB extends StatelessWidget {
               color: Theme.of(context).colorScheme.onSecondary,
             ),
             backgroundColor: Theme.of(context).colorScheme.secondary,
-            labelBackgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+            labelBackgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
             foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
             label: LocaleKeys.delete_books.tr(),
             onTap: () => _showDeleteBooksDialog(context),
@@ -319,7 +319,7 @@ class MultiSelectFAB extends StatelessWidget {
             Expanded(
               child: FilledButton(
                 style: ButtonStyle(
-                  shape: MaterialStateProperty.all(
+                  shape: WidgetStateProperty.all(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(cornerRadius),
                     ),
