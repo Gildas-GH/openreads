@@ -11,11 +11,13 @@ class AddBookSheet extends StatefulWidget {
     required this.addManually,
     required this.searchInOpenLibrary,
     required this.scanBarcode,
+    required this.importUrl,
   });
 
   final Function() addManually;
   final Function() searchInOpenLibrary;
   final Function() scanBarcode;
+  final Function() importUrl;
 
   @override
   State<AddBookSheet> createState() => _AddBookSheetState();
@@ -68,6 +70,14 @@ class _AddBookSheetState extends State<AddBookSheet> {
                 color: Theme.of(context).colorScheme.primary,
               ),
               onTap: widget.scanBarcode,
+            ),
+            ListTile(
+              title: Text("NEW: Import via URL"), // TODO use translated value
+              leading: FaIcon(
+                FontAwesomeIcons.globe,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              onTap: widget.importUrl,
             ),
           ],
         ),

@@ -193,14 +193,31 @@ class OLSearchResultDoc {
   final List<String>? timeKey;
   final String? subtitle;
 
-  factory OLSearchResultDoc.fromJson(Map<String, dynamic> json) =>
-      OLSearchResultDoc(
+  factory OLSearchResultDoc.fromJson(Map<String, dynamic> json) {
+    bool exactMatch = false;
+
+    if (json.containsKey("editions")) {
+      Map<String, dynamic> editions = json["editions"];
+
+      if (editions.containsKey("docs") && editions["docs"] is List && 
+      (editions["docs"] as List).isNotEmpty) {
+        exactMatch = true;
+      }
+    }
+
+    String title = exactMatch ? json["editions"]["docs"][0]["title"] : json["title"];
+    int coverKey = exactMatch ? json["editions"]["docs"][0]["cover_i"] : json["cover_i"];
+    List<String> isbn = exactMatch ? 
+      List<String>.from(json["editions"]["docs"][0]["isbn"]) : 
+      List<String>.from(json["isbn"]);
+
+      return OLSearchResultDoc(
         key: json["key"],
         type: json["type"] == null ? null : typeValues.map[json["type"]],
         seed: json["seed"] == null
             ? null
             : List<String>.from(json["seed"].map((x) => x)),
-        title: json["title"],
+        title: title,
         titleSuggest: json["title_suggest"],
         editionCount: json["edition_count"],
         editionKey: json["edition_key"] == null
@@ -232,9 +249,7 @@ class OLSearchResultDoc {
         ddc: json["ddc"] == null
             ? null
             : List<String>.from(json["ddc"].map((x) => x)),
-        isbn: json["isbn"] == null
-            ? null
-            : List<String>.from(json["isbn"].map((x) => x)),
+        isbn: isbn,
         lastModifiedI: json["last_modified_i"],
         ebookCountI: json["ebook_count_i"],
         ebookAccess: json["ebook_access"] == null
@@ -253,7 +268,7 @@ class OLSearchResultDoc {
         lendingIdentifierS: json["lending_identifier_s"],
         printdisabledS: json["printdisabled_s"],
         coverEditionKey: json["cover_edition_key"],
-        coverI: json["cover_i"],
+        coverI: coverKey,
         firstSentence: json["first_sentence"] == null
             ? null
             : List<String>.from(json["first_sentence"].map((x) => x)),
@@ -392,6 +407,7 @@ class OLSearchResultDoc {
             : List<String>.from(json["time_key"].map((x) => x)),
         subtitle: json["subtitle"],
       );
+  }
 }
 
 enum EbookAccess { borrowable, noEbook, public, printdisabled }

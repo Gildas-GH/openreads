@@ -64,6 +64,8 @@ dependencies:
   sqflite_common_ffi: ^2.3.4
   sqlite3_flutter_libs: ^0.5.26
   collection: ^1.18.0
+  cookie_jar: ^4.0.8
+  html: ^0.15.5
 
 dev_dependencies:
   flutter_test:

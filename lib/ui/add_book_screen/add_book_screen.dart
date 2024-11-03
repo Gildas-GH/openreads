@@ -33,6 +33,7 @@ class AddBookScreen extends StatefulWidget {
     this.duplicatingBook = false,
     this.coverOpenLibraryID,
     this.work,
+    this.coverUrl
   });
 
   final bool fromOpenLibrary;
@@ -41,6 +42,7 @@ class AddBookScreen extends StatefulWidget {
   final bool duplicatingBook;
   final int? coverOpenLibraryID;
   final String? work;
+  final String? coverUrl;
 
   @override
   State<AddBookScreen> createState() => _AddBookScreenState();
@@ -262,16 +264,17 @@ class _AddBookScreenState extends State<AddBookScreen> {
     FocusManager.instance.primaryFocus?.unfocus();
   }
 
-  void _downloadCover() async {
+  void _downloadCover(String? customCoverUrl) async {
     setState(() {
       _isCoverDownloading = true;
     });
 
-    http.get(Uri.parse(coverUrl)).then((response) async {
-      if (!mounted) return;
+    http.get(Uri.parse(customCoverUrl ?? coverUrl)).then((response) async {
 
       if (!mounted) return;
-      await generateBlurHash(response.bodyBytes, context);
+      if (!Platform.isLinux) {
+        await generateBlurHash(response.bodyBytes, context);
+      }
 
       if (!mounted) return;
       context.read<EditBookCoverCubit>().setCover(response.bodyBytes);
@@ -376,9 +379,13 @@ class _AddBookScreenState extends State<AddBookScreen> {
     _prefillBookDetails(context.read<EditBookCubit>().state);
     _attachListeners();
 
+    if (widget.coverUrl != null) {
+      _downloadCover(widget.coverUrl);
+    }
+
     if (widget.fromOpenLibrary || widget.fromOpenLibraryEdition) {
       if (widget.coverOpenLibraryID != null) {
-        _downloadCover();
+        _downloadCover(null);
       } else {
         // Remove temp cover file if book/edition has no cover
         context.read<EditBookCoverCubit>().setCover(null);

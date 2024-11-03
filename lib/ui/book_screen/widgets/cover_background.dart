@@ -17,7 +17,7 @@ class CoverBackground extends StatelessWidget {
         return previous.blurHash != current.blurHash;
       },
       builder: (context, state) {
-        final image = BlurHash.decode(state.blurHash!).toImage(35, 20);
+        final image = BlurHash.decode(state.blurHash ?? "LKO2:N%2Tw=w]~RBVZRi};RPxuwH").toImage(35, 20);
 
         return ClipRRect(
           borderRadius: BorderRadius.only(
