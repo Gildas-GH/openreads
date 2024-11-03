@@ -20,6 +20,7 @@ import 'package:openreads/resources/open_library_service.dart';
 import 'package:openreads/main.dart';
 import 'package:openreads/model/book.dart';
 import 'package:openreads/ui/add_book_screen/widgets/cover_view_edit.dart';
+import 'package:openreads/ui/add_book_screen/widgets/listening_time_field.dart';
 import 'package:openreads/ui/add_book_screen/widgets/widgets.dart';
 import 'package:openreads/ui/common/keyboard_dismissable.dart';
 
@@ -409,6 +410,16 @@ class _AddBookScreenState extends State<AddBookScreen> {
     super.dispose();
   }
 
+  void _showDurationInputDialog(BuildContext context) {
+    DurationInputDialog.show(
+      context, 
+      (totalSeconds) {      
+        _listeningTimeCtrl.text = totalSeconds.toString();
+      },
+      initialSeconds: int.parse(_listeningTimeCtrl.text)
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return KeyboardDismissible(
@@ -523,16 +534,29 @@ class _AddBookScreenState extends State<AddBookScreen> {
                   children: [
                     Expanded(
                       child: _bookFormat == BookFormat.audiobook ?
-                        BookTextField(
-                          controller: _listeningTimeCtrl,
-                          hint: LocaleKeys.listening_time.tr(),
-                          icon: FontAwesomeIcons.solidClock,
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
-                          maxLength: 10,
-                          padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10.0, right: 5.0),
+                          child: FilledButton.tonal(
+                            onPressed: () => _showDurationInputDialog(context),
+                            style: ButtonStyle(
+                                minimumSize: WidgetStateProperty.all(Size(double.infinity, 56)), // Taille du bouton
+                                shape:
+                                  WidgetStateProperty.all(RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(cornerRadius),
+                              )),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  FontAwesomeIcons.solidClock,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                                SizedBox(width: 8), // Espacement entre l'icône et le texte
+                                Text(LocaleKeys.listening_time.tr()),
+                              ],
+                            ),
+                          )
                         )
                       :
                       BookTextField(
