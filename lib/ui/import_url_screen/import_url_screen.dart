@@ -89,6 +89,36 @@ class ImportUrlPageState extends State<ImportUrlPage> {
 
   final TextEditingController _urlController = TextEditingController();
 
+  Future<String?> fetchOlid(String? isbn) async {
+    var client = HttpClient();
+
+    final request = await client.openUrl('GET', Uri.parse('https://openlibrary.org/api/volumes/brief/isbn/$isbn.json'));
+    var response = await request.close();
+
+    if (response.statusCode == 200) {
+      String responseString =
+        await response.transform(convert.utf8.decoder).join();
+
+      var data = convert.jsonDecode(responseString);
+
+      if (data is List) {
+        return null;
+      }
+      // Accéder au premier OLID
+      if (data != null && data.isNotEmpty == true) {
+        if (data.containsKey('records')) {
+          final records = data['records'];
+          final firstRecord = records.values.first; // Prendre le premier enregistrement
+          final olid = firstRecord['olids'].first; // Prendre le premier OLID
+          return olid;
+        }
+      }
+      return null;
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
   // Fonction pour trouver l'année à quatre chiffres
   int? findFourDigitYears(String? date) {
     if (date == null) {
@@ -195,6 +225,7 @@ class ImportUrlPageState extends State<ImportUrlPage> {
       favourite: false,
       pages: numberOfPages,
       isbn: isbn,
+      olid: await fetchOlid(isbn),
       description: description,
       publicationYear: findFourDigitYears(datePublished),
       bookFormat: defaultBookFormat,
