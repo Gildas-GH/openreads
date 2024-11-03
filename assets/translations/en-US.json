@@ -290,5 +290,6 @@
     "warning_yes": "I'm okay with that",
     "warning_no": "Take me back",
     "warning_yes_and_dont_show": "I'm okay with that and don't show this again",
-    "rate_limit": "Rate limit reached. Please try again in 5 minutes."
+    "rate_limit": "Rate limit reached. Please try again in 5 minutes.",
+    "listening_time": "Listening time"
 }

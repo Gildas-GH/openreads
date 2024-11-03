@@ -58,6 +58,12 @@ class EditBookCubit extends Cubit<Book> {
     emit(book);
   }
 
+  void setListeningTime(String listeningTime) {
+    final book = state.copyWith();
+    book.listeningTime = listeningTime.isEmpty ? null : int.parse(listeningTime);
+    emit(book);
+  }
+
   void setDescription(String description) {
     final book = state.copyWith();
     book.description = description.isNotEmpty ? description : null;

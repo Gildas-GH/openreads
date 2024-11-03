@@ -28,7 +28,7 @@ class DatabaseProvider {
 
     return await openDatabase(
       path,
-      version: 8,
+      version: 9,
       onCreate: (Database db, int version) async {
         await db.execute("CREATE TABLE booksTable ("
             "id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -54,7 +54,8 @@ class DatabaseProvider {
             "blur_hash TEXT, "
             "readings TEXT, "
             "date_added TEXT, "
-            "date_modified TEXT "
+            "date_modified TEXT, "
+            "listening_time INTEGER "
             ")");
       },
       onUpgrade: (Database db, int oldVersion, int newVersion) async {
@@ -63,25 +64,28 @@ class DatabaseProvider {
 
           switch (oldVersion) {
             case 1:
-              _updateBookDatabaseV1toV8(batch);
+              _updateBookDatabaseV1toV9(batch);
               break;
             case 2:
-              _updateBookDatabaseV2toV8(batch);
+              _updateBookDatabaseV2toV9(batch);
               break;
             case 3:
-              _updateBookDatabaseV3toV8(batch);
+              _updateBookDatabaseV3toV9(batch);
               break;
             case 4:
-              _updateBookDatabaseV4toV8(batch);
+              _updateBookDatabaseV4toV9(batch);
               break;
             case 5:
-              _updateBookDatabaseV5toV8(batch);
+              _updateBookDatabaseV5toV9(batch);
               break;
             case 6:
-              _updateBookDatabaseV6toV8(batch);
+              _updateBookDatabaseV6toV9(batch);
               break;
             case 7:
-              _updateBookDatabaseV7toV8(batch);
+              _updateBookDatabaseV7toV9(batch);
+              break;
+            case 8:
+              _updateBookDatabaseV8toV9(batch);
               break;
           }
 
@@ -128,7 +132,11 @@ class DatabaseProvider {
     "ALTER TABLE booksTable ADD date_modified TEXT DEFAULT '${DateTime.now().toIso8601String()}'",
   ];
 
-  void _updateBookDatabaseV1toV8(Batch batch) {
+  final migrationScriptsV9 = [
+    "ALTER TABLE booksTable ADD listening_time INTEGER",
+  ];
+
+  void _updateBookDatabaseV1toV9(Batch batch) {
     _executeBatch(
       batch,
       migrationScriptsV2 +
@@ -137,11 +145,12 @@ class DatabaseProvider {
           migrationScriptsV5 +
           migrationScriptsV6 +
           migrationScriptsV7 +
-          migrationScriptsV8,
+          migrationScriptsV8 +
+          migrationScriptsV9,
     );
   }
 
-  void _updateBookDatabaseV2toV8(Batch batch) {
+  void _updateBookDatabaseV2toV9(Batch batch) {
     _executeBatch(
       batch,
       migrationScriptsV3 +
@@ -149,49 +158,64 @@ class DatabaseProvider {
           migrationScriptsV5 +
           migrationScriptsV6 +
           migrationScriptsV7 +
-          migrationScriptsV8,
+          migrationScriptsV8 +
+          migrationScriptsV9,
     );
   }
 
-  void _updateBookDatabaseV3toV8(Batch batch) {
+  void _updateBookDatabaseV3toV9(Batch batch) {
     _executeBatch(
       batch,
       migrationScriptsV4 +
           migrationScriptsV5 +
           migrationScriptsV6 +
           migrationScriptsV7 +
-          migrationScriptsV8,
+          migrationScriptsV8 +
+          migrationScriptsV9,
     );
   }
 
-  void _updateBookDatabaseV4toV8(Batch batch) {
+  void _updateBookDatabaseV4toV9(Batch batch) {
     _executeBatch(
       batch,
       migrationScriptsV5 +
           migrationScriptsV6 +
           migrationScriptsV7 +
-          migrationScriptsV8,
+          migrationScriptsV8 +
+          migrationScriptsV9,
     );
   }
 
-  void _updateBookDatabaseV5toV8(Batch batch) {
+  void _updateBookDatabaseV5toV9(Batch batch) {
     _executeBatch(
       batch,
-      migrationScriptsV6 + migrationScriptsV7 + migrationScriptsV8,
+      migrationScriptsV6 + 
+          migrationScriptsV7 + 
+          migrationScriptsV8 +
+          migrationScriptsV9,
     );
   }
 
-  void _updateBookDatabaseV6toV8(Batch batch) {
+  void _updateBookDatabaseV6toV9(Batch batch) {
     _executeBatch(
       batch,
-      migrationScriptsV7 + migrationScriptsV8,
+      migrationScriptsV7 + 
+          migrationScriptsV8 +
+          migrationScriptsV9,
     );
   }
 
-  void _updateBookDatabaseV7toV8(Batch batch) {
+  void _updateBookDatabaseV7toV9(Batch batch) {
     _executeBatch(
       batch,
-      migrationScriptsV8,
+      migrationScriptsV8 + migrationScriptsV9,
+    );
+  }
+
+  void _updateBookDatabaseV8toV9(Batch batch) {
+    _executeBatch(
+      batch,
+      migrationScriptsV9,
     );
   }
 }

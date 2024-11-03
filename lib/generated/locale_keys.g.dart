@@ -284,5 +284,6 @@ abstract class  LocaleKeys {
   static const warning_no = 'warning_no';
   static const warning_yes_and_dont_show = 'warning_yes_and_dont_show';
   static const rate_limit = 'rate_limit';
+  static const listening_time = 'listening_time';
 
 }

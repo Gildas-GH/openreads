@@ -50,6 +50,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
   final _subtitleCtrl = TextEditingController();
   final _authorCtrl = TextEditingController();
   final _pagesCtrl = TextEditingController();
+  final _listeningTimeCtrl = TextEditingController();
   final _pubYearCtrl = TextEditingController();
   final _descriptionCtrl = TextEditingController();
   final _isbnCtrl = TextEditingController();
@@ -61,6 +62,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
   final _animDuration = const Duration(milliseconds: 250);
 
   bool _isCoverDownloading = false;
+  BookFormat? _bookFormat;
 
   static const String coverBaseUrl = 'https://covers.openlibrary.org/';
   late final String coverUrl =
@@ -79,11 +81,13 @@ class _AddBookScreenState extends State<AddBookScreen> {
     _authorCtrl.text = book.author;
     _pubYearCtrl.text = (book.publicationYear ?? '').toString();
     _pagesCtrl.text = (book.pages ?? '').toString();
+    _listeningTimeCtrl.text = (book.listeningTime ?? '').toString();
     _descriptionCtrl.text = book.description ?? '';
     _isbnCtrl.text = book.isbn ?? '';
     _olidCtrl.text = book.olid ?? '';
     _myReviewCtrl.text = book.myReview ?? '';
     _notesCtrl.text = book.notes ?? '';
+    _bookFormat = book.bookFormat;
 
     if (!widget.fromOpenLibrary && !widget.fromOpenLibraryEdition) {
       if (!widget.duplicatingBook) {
@@ -187,20 +191,20 @@ class _AddBookScreenState extends State<AddBookScreen> {
         builder: (context) {
           return AlertDialog.adaptive(
             title: Text(
-              LocaleKeys.coverStillDownloaded.tr(),
+              LocaleKeys.cover_still_downloaded.tr(),
             ),
             actionsAlignment: MainAxisAlignment.spaceBetween,
             actions: [
               Platform.isIOS
                   ? CupertinoDialogAction(
                       isDefaultAction: true,
-                      child: Text(LocaleKeys.waitForDownloadingToFinish.tr()),
+                      child: Text(LocaleKeys.wait_for_downloading_to_finish.tr()),
                       onPressed: () {
                         Navigator.of(context).pop(true);
                       },
                     )
                   : TextButton(
-                      child: Text(LocaleKeys.waitForDownloadingToFinish.tr()),
+                      child: Text(LocaleKeys.wait_for_downloading_to_finish.tr()),
                       onPressed: () {
                         Navigator.of(context).pop(true);
                       },
@@ -208,14 +212,14 @@ class _AddBookScreenState extends State<AddBookScreen> {
               Platform.isIOS
                   ? CupertinoDialogAction(
                       isDestructiveAction: true,
-                      child: Text(LocaleKeys.saveWithoutCover.tr()),
+                      child: Text(LocaleKeys.save_without_cover.tr()),
                       onPressed: () {
                         Navigator.of(context).pop(false);
                       },
                     )
                   : TextButton(
                       child: Text(
-                        LocaleKeys.saveWithoutCover.tr(),
+                        LocaleKeys.save_without_cover.tr(),
                         style: TextStyle(
                             color: Theme.of(context).colorScheme.error),
                       ),
@@ -235,17 +239,24 @@ class _AddBookScreenState extends State<AddBookScreen> {
   void _changeBookType(String? bookType) {
     if (bookType == null) return;
 
+    BookFormat tmpBookFormat;
+
     if (bookType == bookTypes[0]) {
-      context.read<EditBookCubit>().setBookFormat(BookFormat.paperback);
+      tmpBookFormat = BookFormat.paperback;
     } else if (bookType == bookTypes[1]) {
-      context.read<EditBookCubit>().setBookFormat(BookFormat.hardcover);
+      tmpBookFormat = BookFormat.hardcover;
     } else if (bookType == bookTypes[2]) {
-      context.read<EditBookCubit>().setBookFormat(BookFormat.ebook);
+      tmpBookFormat = BookFormat.ebook;
     } else if (bookType == bookTypes[3]) {
-      context.read<EditBookCubit>().setBookFormat(BookFormat.audiobook);
+      tmpBookFormat = BookFormat.audiobook;
     } else {
-      context.read<EditBookCubit>().setBookFormat(BookFormat.paperback);
+      tmpBookFormat = BookFormat.paperback;
     }
+
+    context.read<EditBookCubit>().setBookFormat(tmpBookFormat);
+    setState(() {
+      _bookFormat = tmpBookFormat;
+    });
 
     FocusManager.instance.primaryFocus?.unfocus();
   }
@@ -330,6 +341,10 @@ class _AddBookScreenState extends State<AddBookScreen> {
       context.read<EditBookCubit>().setPages(_pagesCtrl.text);
     });
 
+    _listeningTimeCtrl.addListener(() {
+      context.read<EditBookCubit>().setListeningTime(_listeningTimeCtrl.text);
+    });
+
     _descriptionCtrl.addListener(() {
       context.read<EditBookCubit>().setDescription(_descriptionCtrl.text);
     });
@@ -382,6 +397,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
     _subtitleCtrl.dispose();
     _authorCtrl.dispose();
     _pagesCtrl.dispose();
+    _listeningTimeCtrl.dispose();
     _pubYearCtrl.dispose();
     _descriptionCtrl.dispose();
     _isbnCtrl.dispose();
@@ -506,7 +522,20 @@ class _AddBookScreenState extends State<AddBookScreen> {
                 Row(
                   children: [
                     Expanded(
-                      child: BookTextField(
+                      child: _bookFormat == BookFormat.audiobook ?
+                        BookTextField(
+                          controller: _listeningTimeCtrl,
+                          hint: LocaleKeys.listening_time.tr(),
+                          icon: FontAwesomeIcons.solidClock,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          maxLength: 10,
+                          padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
+                        )
+                      :
+                      BookTextField(
                         controller: _pagesCtrl,
                         hint: LocaleKeys.enter_pages.tr(),
                         icon: FontAwesomeIcons.solidFileLines,

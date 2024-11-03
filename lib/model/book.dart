@@ -33,6 +33,7 @@ class Book {
   List<Reading> readings;
   DateTime dateAdded;
   DateTime dateModified;
+  int? listeningTime;
 
   Book({
     this.id,
@@ -58,6 +59,7 @@ class Book {
     required this.readings,
     required this.dateAdded,
     required this.dateModified,
+    this.listeningTime
   });
 
   factory Book.empty({
@@ -119,6 +121,7 @@ class Book {
       dateModified: json['date_modified'] != null
           ? DateTime.parse(json['date_modified'])
           : DateTime.now(),
+      listeningTime: json['listening_time'],
     );
   }
 
@@ -145,6 +148,7 @@ class Book {
     List<Reading>? readings,
     DateTime? dateAdded,
     DateTime? dateModified,
+    int? listeningTime,
   }) {
     return Book(
       id: id,
@@ -170,6 +174,7 @@ class Book {
       readings: readings ?? this.readings,
       dateAdded: dateAdded ?? this.dateAdded,
       dateModified: dateModified ?? this.dateModified,
+      listeningTime: listeningTime ?? this.listeningTime,
     );
   }
 
@@ -198,6 +203,7 @@ class Book {
       readings: readings,
       dateAdded: dateAdded,
       dateModified: dateModified,
+      listeningTime: listeningTime,
     );
   }
 
@@ -254,6 +260,7 @@ class Book {
             ],
       dateAdded: DateTime.now(),
       dateModified: DateTime.now(),
+      listeningTime: oldBook.bookListeningTime,
     );
   }
 
@@ -289,6 +296,7 @@ class Book {
       'readings': readings.map((reading) => reading.toString()).join(';'),
       'date_added': dateAdded.toIso8601String(),
       'date_modified': dateModified.toIso8601String(),
+      'listening_time': listeningTime
     };
   }
 

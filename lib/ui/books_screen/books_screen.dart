@@ -435,7 +435,7 @@ class _BooksScreenState extends State<BooksScreen>
     List<Book> booksWithPages = List.empty(growable: true);
 
     for (Book book in list) {
-      (book.pages != null)
+      (book.pages != null && book.bookFormat != BookFormat.audiobook)
           ? booksWithPages.add(book)
           : booksWithoutPages.add(book);
     }

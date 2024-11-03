@@ -7,6 +7,7 @@ import 'package:openreads/logic/cubit/current_book_cubit.dart';
 import 'package:openreads/main.dart';
 import 'package:openreads/model/book.dart';
 import 'package:openreads/model/reading.dart';
+import 'package:openreads/model/reading_time.dart';
 import 'package:openreads/ui/book_screen/widgets/widgets.dart';
 
 class BookScreen extends StatelessWidget {
@@ -193,12 +194,19 @@ class BookScreen extends StatelessWidget {
                         SizedBox(
                           height: (state.pages != null) ? 5 : 0,
                         ),
-                        (state.pages != null)
-                            ? BookDetail(
-                                title: LocaleKeys.pages_uppercase.tr(),
-                                text: (state.pages ?? "").toString(),
-                              )
-                            : const SizedBox(),
+                        (state.bookFormat == BookFormat.audiobook) ?
+                          (state.listeningTime != null)
+                              ? BookDetail(
+                                  title: LocaleKeys.listening_time.tr(),
+                                  text: ReadingTime.fromMilliSeconds((state.listeningTime ?? 0) * 1000).toString()
+                                )
+                              : const SizedBox() 
+                        : (state.pages != null)
+                              ? BookDetail(
+                                  title: LocaleKeys.pages_uppercase.tr(),
+                                  text: (state.pages ?? "").toString(),
+                                )
+                              : const SizedBox(),
                         SizedBox(
                           height: (state.description != null &&
                                   state.description!.isNotEmpty)

@@ -290,5 +290,6 @@
     "warning_yes": "Ça me va",
     "warning_no": "Retour",
     "warning_yes_and_dont_show": "Ça me va, ne plus me le rappeler",
-    "rate_limit": "Limite atteinte. Veuillez réessayer dans 5 minutes."
+    "rate_limit": "Limite atteinte. Veuillez réessayer dans 5 minutes.",
+    "listening_time": "Temps d'écoute"
 }

@@ -43,7 +43,7 @@ class _BookCardState extends State<BookCard> {
       builder: (context, state) {
         if (state is SetSortState) {
           if (state.sortType == SortType.byPages) {
-            return (widget.book.pages != null)
+            return (widget.book.pages != null && widget.book.bookFormat != BookFormat.audiobook)
                 ? _buildPagesAttribute()
                 : const SizedBox();
           } else if (state.sortType == SortType.byStartDate) {

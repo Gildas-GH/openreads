@@ -102,6 +102,7 @@ class CSVImportOpenreads {
         readings: _getReadingDates(i, csv),
         dateAdded: _getDate(i, csv, 'date_added') ?? DateTime.now(),
         dateModified: _getDate(i, csv, 'date_modified') ?? DateTime.now(),
+        listeningTime: _getListeningTime(i, csv),
       );
     } catch (e) {
       BackupGeneral.showInfoSnackbar(e.toString());
@@ -189,6 +190,11 @@ class CSVImportOpenreads {
   static int? _getPages(int i, List<List<dynamic>> csv) {
     final pagesField = csv[i][csv[0].indexOf('pages')].toString();
     return pagesField.isNotEmpty ? int.tryParse(pagesField) : null;
+  }
+
+  static int? _getListeningTime(int i, List<List<dynamic>> csv) {
+    final listeningTimeField = csv[i][csv[0].indexOf('listening_time')].toString();
+    return listeningTimeField.isNotEmpty ? int.tryParse(listeningTimeField) : null;
   }
 
   static int? _getPublicationYear(int i, List<List<dynamic>> csv) {

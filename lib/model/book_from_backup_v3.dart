@@ -18,6 +18,7 @@ class BookFromBackupV3 {
   final String? bookTags;
   final String? bookNotes;
   final Uint8List? bookCoverImg;
+  final int? bookListeningTime;
 
   BookFromBackupV3({
     this.id,
@@ -37,6 +38,7 @@ class BookFromBackupV3 {
     this.bookTags,
     this.bookNotes,
     this.bookCoverImg,
+    this.bookListeningTime,
   });
 
   factory BookFromBackupV3.fromJson(Map<String, dynamic> json) {
@@ -58,6 +60,7 @@ class BookFromBackupV3 {
       bookTags: json['item_bookTags'] as String?,
       bookNotes: json['item_bookNotes'] as String?,
       bookCoverImg: json['item_bookCoverImg'] as Uint8List?,
+      bookListeningTime: json['item_bookListeningTime'] as int?,
     );
   }
 }
