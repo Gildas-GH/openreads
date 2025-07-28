@@ -101,8 +101,11 @@ class _BooksListState extends State<BooksList>
                 'tag_${widget.listNumber}_${widget.books[index].id}';
             Color? color = multiSelectMode &&
                     widget.selectedBookIds!.contains(widget.books[index].id)
-                ? Theme.of(context).colorScheme.secondaryContainer
-                : null;
+                ? Theme.of(context).colorScheme.tertiaryContainer
+                : Theme.of(context)
+                    .colorScheme
+                    .secondaryContainer
+                    .withAlpha(50);
             return BookCard(
               book: widget.books[index],
               heroTag: heroTag,

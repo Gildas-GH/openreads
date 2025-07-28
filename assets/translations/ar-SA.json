@@ -214,12 +214,14 @@
     "custom_color": "ألوان مخصصة",
     "hour": {
         "one": "{} ساعة",
-        "other": "{} من الساعات"
+        "other": "{} من الساعات",
+        "set_custom_time_title": "ساعات"
     },
     "csv": "CSV",
     "minute": {
         "other": "{} من الدقائق",
-        "one": "{} دقيقة"
+        "one": "{} دقيقة",
+        "set_custom_time_title": "دقائق"
     },
     "choose_not_finished_shelf": "إختر لائحة الكتب غير المنجزة:",
     "export_successful": "تم التصدير بنجاح",
@@ -237,7 +239,8 @@
     "set_custom_reading_time": "تحديد مدة القراءة",
     "day": {
         "one": "{} يوم",
-        "other": "{} من الأيام"
+        "other": "{} من الأيام",
+        "set_custom_time_title": "أيام"
     },
     "import_successful": "تم الإستيراد بنجاح",
     "book_format_all": "جميع الأصناف",
@@ -254,5 +257,33 @@
     "isbn_cannot_be_empty": "الرقم الدولي الموحد للكتاب (ISBN) لا يمكن أن يكون فارغا",
     "cover_not_found_in_ol": "لم يتم العثور على الغلاف في Open Library",
     "no_search_results": "لم يتم العثور على أية نتائج",
-    "delete_books": "حذف الكتب"
+    "delete_books": "حذف الكتب",
+    "delete_books_question": "هل ترغب في حذف الكتب المختارة؟",
+    "book_cover": "غلاف الكتاب",
+    "date_added": "تاريخ الإضافة",
+    "date_modified": "تاريخ التعديل",
+    "added_on": "تمت إضافته بتاريخ",
+    "modified_on": "تم تعديله بتاريخ",
+    "edit_current_cover": "تعديل الغلاف الحالي",
+    "books_settings": "الكتب",
+    "import_bookwyrm_csv": "استيراد BookWyrm CSV",
+    "import_csv": "استيراد BookWyrm CSV",
+    "general_search": "بحث عام",
+    "download_missing_covers": "تنزيل الاخلفة المفقودة",
+    "download_missing_covers_explanation": "تنزيل الأغلفة المفقودة للكتب التي تم تعيين رقم ISBN لها",
+    "downloaded_covers": "عنوان قائمة الكتب ذات الغلاف المحمل",
+    "try_downloading_covers": "هل تريد محاولة تحميل الأغلفة المفقودة للكتب المستوردة؟",
+    "add_additional_reading_time": "تتبع القراءة",
+    "start_adding_books": "إذهب إلى التطبيق",
+    "help_to_get_started": "لمساعدتك على البدء، هذا بعض ما يمكنك فعله",
+    "cover_still_downloaded": "الغلاف قيد التحميل",
+    "wait_for_downloading_to_finish": "انتظر انتهاء التحميل",
+    "save_without_cover": "احفظ بدون الغلاف",
+    "search_online_for_cover": "ابحث عن غلاف على الشبكة",
+    "duplicate_book": "انسخ الكتب",
+    "copy_book": "نسخ",
+    "duck_duck_go_warning": "إن البحث عن أغلفة على الشبكة عبر محرك(DuckDuckGo)، خدمة مملوكة. رجاء انتبه للخصوصية",
+    "warning_yes": "أنا موافق على ذلك",
+    "warning_no": "خذني للوراء",
+    "warning_yes_and_dont_show": "أنا موافق على ذلك ولا تظهر مرة أخرى"
 }

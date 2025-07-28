@@ -42,7 +42,7 @@ class CSVImportGoodreads {
 
   static Future importCSV(BuildContext context) async {
     try {
-      final csvBytes = await BackupGeneral.pickFileAndGetContent();
+      final csvBytes = await BackupGeneral.pickCSVFileAndGetContent();
       if (csvBytes == null) return;
 
       // ignore: use_build_context_synchronously
@@ -373,7 +373,7 @@ class CSVImportGoodreads {
         final day = int.parse(splittedDate[2]);
 
         final dateRead = DateTime(year, month, day);
-        readingDates.add(Reading(startDate: dateRead));
+        readingDates.add(Reading(finishDate: dateRead));
       }
     }
 

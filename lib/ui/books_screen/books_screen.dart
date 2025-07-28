@@ -397,8 +397,7 @@ class _BooksScreenState extends State<BooksScreen>
     }
 
     booksRated.sort((a, b) {
-      int ratingSorting = removeDiacritics(a.rating!.toString().toLowerCase())
-          .compareTo(removeDiacritics(b.rating!.toString().toLowerCase()));
+      int ratingSorting = a.rating!.compareTo(b.rating!);
       if (!isAsc) {
         ratingSorting *= -1;
       } // descending
@@ -751,7 +750,9 @@ class _BooksScreenState extends State<BooksScreen>
   }
 
   BookStatus _getStatusForNewBook() {
-    if (_tabController.index == 1) {
+    final inProgressIndex = readTabFirst ? 1 : 0;
+
+    if (_tabController.index == inProgressIndex) {
       return BookStatus.inProgress;
     } else if (_tabController.index == 2) {
       return BookStatus.forLater;

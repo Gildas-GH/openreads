@@ -11,6 +11,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:openreads/core/constants/constants.dart';
 import 'package:openreads/core/constants/locale.dart';
+import 'package:openreads/core/helpers/locale_delegates/locale_delegates.dart';
 import 'package:openreads/core/helpers/old_android_http_overrides.dart';
 import 'package:openreads/logic/bloc/challenge_bloc/challenge_bloc.dart';
 import 'package:openreads/logic/bloc/display_bloc/display_bloc.dart';
@@ -46,7 +47,9 @@ void main() async {
   _setLinuxConfig();
 
   HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory: await getApplicationDocumentsDirectory(),
+    storageDirectory: HydratedStorageDirectory(
+      (await getApplicationDocumentsDirectory()).path,
+    ),
   );
 
   appDocumentsDirectory = await getApplicationDocumentsDirectory();
@@ -164,6 +167,12 @@ class _OpenreadsAppState extends State<OpenreadsApp>
   Widget build(BuildContext context) {
     _initDateFormat(context);
 
+    final localizationsDelegates = [
+      ...context.localizationDelegates,
+      const NynorskMaterialLocalizationsDelegate(),
+      const NynorskCupertinoLocalizationsDelegate(),
+    ];
+
     return DynamicColorBuilder(
         builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
       if (widget.themeState.amoledDark) {
@@ -229,7 +238,7 @@ class _OpenreadsAppState extends State<OpenreadsApp>
           home: welcomeMode
               ? WelcomeScreen(themeData: Theme.of(context))
               : const BooksScreen(),
-          localizationsDelegates: context.localizationDelegates,
+          localizationsDelegates: localizationsDelegates,
           supportedLocales: context.supportedLocales,
           locale: context.locale,
         ),
@@ -268,5 +277,13 @@ Future _initDateFormat(BuildContext context) async {
   await initializeDateFormatting();
 
   // ignore: use_build_context_synchronously
-  dateFormat = DateFormat.yMMMMd(context.locale.toString());
+  String locale = context.locale.toString();
+
+  // Fallback to another locale as nn-NO is not supported by Flutter
+  if (locale == const Locale('nn').toString()) {
+    locale = const Locale('no', 'NO').toString();
+  }
+
+  // ignore: use_build_context_synchronously
+  dateFormat = DateFormat.yMMMMd(locale);
 }
